@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect Example</title>
+</head>
+<body>
+
+<h1>Welcome to the Redirect Example</h1>
+
+<button onclick="redirectToExample()">Click Here</button>
+
+<script>
+    function redirectToExample() {
+        // Make an AJAX request to the /capture_attendance endpoint
+        fetch('/capture_attendance', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data (in this example, show an alert)
+                alert(data.result);
+            })
+            .catch(error => {
+                // Handle any errors that may occur during the request
+                console.error('Error:', error);
+            });
+    }
+</script>
+
+</body>
+</html>
