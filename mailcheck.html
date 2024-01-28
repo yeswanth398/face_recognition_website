@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-image: url('mc.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: black; /* Set text color to black */
+        }
+
+        input {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        #loginForm {
+            max-width: 300px;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: black; /* Set text color to black */
+        }
+    </style>
+</head>
+<body>
+
+<div id="loginForm">
+    <h2>Login</h2>
+    <form id="login">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <br>
+        <button type="button" onclick="validateCredentials()">Login</button>
+        <br>
+        <button onclick="scheduleNotification()">Schedule Attendance Reminder</button>
+    </form>
+</div>
+
+<script>
+    function validateCredentials() {
+        const allowedDomain = '@cmrcet.ac.in';
+
+        const emailInput = document.getElementById('email').value.trim().toLowerCase();
+        const passwordInput = document.getElementById('password').value;
+
+        if (emailInput.endsWith(allowedDomain) && emailInput.split('@')[0] === passwordInput) {
+            localStorage.setItem('enteredEmail', emailInput);
+            alert('Login successful!');
+            window.location.href = "timecheck.html";
+        } else {
+            alert('Access denied. Please enter a valid CMRCET email address and password.');
+        }
+    }
+
+    function scheduleNotification() {
+        const notificationMessage = "You need to post the attendance at this time!";
+        const notificationTime = new Date();
+        notificationTime.setHours(9, 15, 0); // Set notification time to 9:15 AM
+
+        // Schedule the notification
+        Notification.requestPermission().then(function (permission) {
+            if (permission === "granted") {
+                setTimeout(function () {
+                    new Notification("Attendance Reminder", { body: notificationMessage });
+                }, notificationTime - Date.now());
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

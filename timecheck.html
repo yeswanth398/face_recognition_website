@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restricted Access</title>
+    <style>
+        body {
+            background-image: url('stopwatch.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            color: black;
+        }
+
+        #greetingMessage, p {
+            color: black;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        #accessButton {
+            display: none;
+            background-color: #4CAF50;
+            color: black;
+            padding: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        // Function to check if the current time is within the allowed range
+        function isAccessAllowed() {
+            var currentDate = new Date();
+            var currentHours = currentDate.getHours();
+            var currentMinutes = currentDate.getMinutes();
+            var currentSeconds = currentDate.getSeconds();
+
+            // Set your start and end times
+            var startHours = 2;
+            var startMinutes = 0;
+            var startSeconds = 0;
+
+            var endHours = 23;
+            var endMinutes = 59;
+            var endSeconds = 59;
+
+            return (
+                currentHours > startHours ||
+                (currentHours === startHours && currentMinutes >= startMinutes && currentSeconds >= startSeconds)
+            ) && (
+                currentHours < endHours ||
+                (currentHours === endHours && currentMinutes <= endMinutes && currentSeconds <= endSeconds)
+            );
+        }
+
+        // Function to show or hide the "Click Here" button based on access
+        function updateAccessButton() {
+            var accessButton = document.getElementById('accessButton');
+            var greetingMessage = document.getElementById('greetingMessage');
+            var infoMessage = document.getElementById('infoMessage');
+
+            if (isAccessAllowed()) {
+                accessButton.style.display = 'block';
+                greetingMessage.style.display = 'block'; // Show the greeting message
+                infoMessage.style.display = 'none'; // Hide the info message
+            } else {
+                accessButton.style.display = 'none';
+                greetingMessage.style.display = 'none'; // Hide the greeting message
+                infoMessage.style.display = 'block'; // Show the info message
+            }
+        }
+    </script>
+</head>
+<body onload="updateAccessButton()">
+    <h1 id="greetingMessage" style="display: none;">You have accessed the website within the time. Click here to go to the next page.</h1>
+    
+    <p id="infoMessage">Try to open the website within attendance time next time.</p>
+
+    <button id="accessButton" onclick="window.location.href='register.html'">
+        Click Here to Register
+    </button>
+    
+    </button>
+</body>
+</html>
+
+
+

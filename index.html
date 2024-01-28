@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restricted Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('clglogo.jpg'); /* Add the URL of your background image */
+            background-size: 100%; /* Adjust the background image size */
+            background-position: center center; /* Center the background image */
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Set the height to 100% of the viewport height */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Set the background color with some transparency */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Restricted Website</h1>
+        <p>This website can only be accessed from a specific location.</p>
+        <!-- Add id="checkLocationButton" to the button element -->
+        <button id="checkLocationButton">Check Location</button>
+    </div>
+    <script src="/script.js"></script>
+</body>
+</html>
